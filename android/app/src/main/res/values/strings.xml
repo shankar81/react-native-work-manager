@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RNWorkManager</string>
+    <string name="notification_name">Syncing update master</string>
+    <string name="notification_description">Updating master data…</string>
+</resources>
