@@ -3,6 +3,13 @@ Background scheduling for React-Native using WorkManager from Android Jetpack
 
 Start schduling or cancel the current task by ID
 
+
+```javascript
+function test() {
+ console.log("look ma’, no spaces");
+}
+```
+
 ![image](https://user-images.githubusercontent.com/46323867/111748506-a2b30a00-88b6-11eb-8a0f-b50d13367d21.png)
 
 Define the Headless task in index.js file
