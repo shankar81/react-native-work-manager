@@ -2,6 +2,4 @@
 Background scheduling for React-Native using WorkManager from Android Jetpack 
 
 
-![video](https://user-images.githubusercontent.com/46323867/111747893-de010900-88b5-11eb-848f-a21127891772.gif)
-
-
+![video](https://user-images.githubusercontent.com/46323867/111748098-1c96c380-88b6-11eb-99ef-340869a83b4a.gif)
