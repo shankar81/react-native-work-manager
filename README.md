@@ -53,6 +53,25 @@ AppRegistry.registerHeadlessTask('MyTaskInJS', () => require('./MyWork'));
 
 ```
 
+MyWork.js 
+
+```javascript
+module.exports = async () => {
+  console.log('Running in background');
+  console.log('Running in background');
+  console.log('Running in background');
+  console.log('Running in background');
+  console.log('Running in background');
+  console.log('Running in background');
+
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const json = await response.json();
+
+  console.log(`Fetched from api ${JSON.stringify(json)}`);
+};
+
+```
+
 After initial delay of 10 seconds the task will run automatically
 and every 15 Minutes interval if PERIODIC is set
 
