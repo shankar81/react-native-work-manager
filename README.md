@@ -5,16 +5,49 @@ Start schduling or cancel the current task by ID
 
 
 ```javascript
-function test() {
- console.log("look ma’, no spaces");
-}
-```
+import React, { useState } from 'react';
+import { Button, View } from 'react-native';
+import { cancelJobById, scheduleJob } from './ReactNativeWorkManager';
 
-![image](https://user-images.githubusercontent.com/46323867/111748506-a2b30a00-88b6-11eb-8a0f-b50d13367d21.png)
+export default function App() {
+  const [jobId, setJobId] = useState<string | undefined>(undefined);
+
+  async function onScheduleTask() {
+    const id = await scheduleJob({
+      uniqueName: 'Some_Unique_name',
+      type: 'PERIODIC',
+      initialDelay: 10,
+      intervalDelayUnit: 'SECONDS',
+      repeatInterval: 15,
+      intervalUnit: 'MINUTES',
+      notificationTitle: 'This is my notification title',
+      notificationDesc: 'This is my notification description from JS code',
+    });
+    setJobId(id);
+  }
+
+  function onCancelJob() {
+    cancelJobById(jobId);
+  }
+
+  return (
+    <View>
+      <Button title="Set up request" onPress={onScheduleTask} />
+      <Button title="Cancel request" onPress={onCancelJob} />
+    </View>
+  );
+}
+
+```
 
 Define the Headless task in index.js file
 
-![image](https://user-images.githubusercontent.com/46323867/111748708-df7f0100-88b6-11eb-86d4-4a340a2ae572.png)
+```javascript
+
+// Register your task here for Headless JS
+AppRegistry.registerHeadlessTask('MyTaskInJS', () => require('./MyWork'));
+
+```
 
 After initial delay of 10 seconds the task will run automatically
 and every 15 Minutes interval if PERIODIC is set
