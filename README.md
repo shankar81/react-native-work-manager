@@ -16,6 +16,9 @@ export default function App() {
     /**
       scheduleJob() function returns the ID Promise<String> of the task
       You can use that ID to cancel the job later
+      
+      timeUnit can be one of the below types
+      type TimeUnit = 'MILLISECONDS' | 'SECONDS' | 'MINUTES' | 'HOURS';
     **/
     const id = await scheduleJob({
       uniqueName: 'Some_Unique_name',
