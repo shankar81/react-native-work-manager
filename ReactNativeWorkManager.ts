@@ -9,11 +9,12 @@ function scheduleJob(params: ScheduleParams): Promise<string> {
       params.uniqueName,
       params.type,
       params.initialDelay,
-      params.initialUnit,
+      params.intervalDelayUnit,
       params.repeatInterval,
       params.intervalUnit,
       params.notificationTitle,
       params.notificationDesc,
+      params.notificationColor,
       (id: string) => {
         resolve(id);
       },

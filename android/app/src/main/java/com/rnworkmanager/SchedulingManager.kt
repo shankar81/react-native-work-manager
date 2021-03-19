@@ -27,6 +27,7 @@ class SchedulingManager(private val reactContext: ReactApplicationContext) : Rea
             intervalUnit: String,
             notificationTitle: String,
             notificationDesc: String,
+            notificationColor: String? = "",
             cb: Callback,
     ) {
         Log.d(TAG, """ setUpWorker
@@ -49,6 +50,7 @@ class SchedulingManager(private val reactContext: ReactApplicationContext) : Rea
         val data = Data.Builder()
                 .putString(WORK_NOTIFICATION_TITLE, notificationTitle)
                 .putString(WORK_NOTIFICATION_DESCRIPTION, notificationDesc)
+                .putString(WORK_NOTIFICATION_COLOR, notificationColor)
                 .build()
 
         val oneTimeRequest = OneTimeWorkRequest
@@ -60,6 +62,7 @@ class SchedulingManager(private val reactContext: ReactApplicationContext) : Rea
         val periodicRequest = PeriodicWorkRequest
                 .Builder(MyWorkRequest::class.java, repeatInterval.toLong(), intervalTimeUnit)
                 .setInitialDelay(initialDelay.toLong(), unit)
+                .setInputData(data)
                 .setConstraints(constraints)
                 .build()
 

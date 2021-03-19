@@ -3,6 +3,7 @@ package com.rnworkmanager
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -29,8 +30,10 @@ class MyHeadlessService : HeadlessJsTaskService() {
         extras.putString("Default Key", "Default Value")
         Log.d(TAG, "getTaskConfig: $extras")
 
-        showNotification(extras.getString(WORK_NOTIFICATION_TITLE, "DEFAULT TITLE"),
-                extras.getString(WORK_NOTIFICATION_DESCRIPTION, "DEFAULT DESCRIPTION"))
+        showNotification(
+                extras.getString(WORK_NOTIFICATION_TITLE, "DEFAULT TITLE"),
+                extras.getString(WORK_NOTIFICATION_COLOR, ""),
+        )
 
         return HeadlessJsTaskConfig(
                 "MyTaskInJS",
@@ -40,16 +43,18 @@ class MyHeadlessService : HeadlessJsTaskService() {
         )
     }
 
-    private fun showNotification(title: String, desc: String) {
+    private fun showNotification(title: String, color: String) {
         val notification = NotificationCompat
                 .Builder(baseContext, MainApplication.CHANNEL_ID)
                 .setSmallIcon(R.drawable.redbox_top_border_background)
                 .setContentTitle(title)
-                .setContentText(desc)
+                .setProgress(10, 5, true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .build()
 
-        startForeground(2, notification)
+        if (color.isNotBlank()) {
+            notification.color = Color.RED
+        }
+        startForeground(2, notification.build())
     }
 
     override fun onHeadlessJsTaskFinish(taskId: Int) {

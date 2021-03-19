@@ -11,12 +11,14 @@ import com.facebook.react.HeadlessJsTaskService
 private const val TAG = "MyWorkRequest"
 const val WORK_NOTIFICATION_TITLE = "WORK_NOTIFICATION_TITLE"
 const val WORK_NOTIFICATION_DESCRIPTION = "WORK_NOTIFICATION_DESCRIPTION"
+const val WORK_NOTIFICATION_COLOR = "WORK_NOTIFICATION_COLOR"
 
 class MyWorkRequest(context: Context, private val workParams: WorkerParameters) : Worker(context, workParams) {
     override fun doWork(): Result {
         val service = Intent(applicationContext, MyHeadlessService::class.java).apply {
             putExtra(WORK_NOTIFICATION_TITLE, workParams.inputData.getString(WORK_NOTIFICATION_TITLE))
             putExtra(WORK_NOTIFICATION_DESCRIPTION, workParams.inputData.getString(WORK_NOTIFICATION_DESCRIPTION))
+            putExtra(WORK_NOTIFICATION_COLOR, workParams.inputData.getString(WORK_NOTIFICATION_COLOR))
         }
 
         HeadlessJsTaskService.acquireWakeLockNow(applicationContext)
