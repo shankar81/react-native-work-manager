@@ -13,6 +13,10 @@ export default function App() {
   const [jobId, setJobId] = useState<string | undefined>(undefined);
 
   async function onScheduleTask() {
+    /**
+      scheduleJob() function returns the ID Promise<String> of the task
+      You can use that ID to cancel the job later
+    **/
     const id = await scheduleJob({
       uniqueName: 'Some_Unique_name',
       type: 'PERIODIC',
